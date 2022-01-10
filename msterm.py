@@ -68,7 +68,6 @@ terminal.set_bold_is_bright(True)                # Make text bright
 # Color of the foreground (r, g, b, a)
 terminal.set_color_foreground(Gdk.RGBA(1.0, 1.0, 1.0, 1.0))
 window.add(terminal)
-window.resize(800, 1200)
 window.show_all()
 
 Gtk.main()
