@@ -16,6 +16,7 @@ from gi.repository import Vte
 
 command = [os.environ.get("SHELL")]
 SET_TITLE = False
+FONT_SIZE = 12
 
 i = 0
 
@@ -35,6 +36,10 @@ while i < len(sys.argv):
     elif arg in ("-T", "-t", "--title"):
         SET_TITLE = True
         title = sys.argv[i + 1]
+        i += 1
+    
+    elif arg in ("-f", "--font-size"):
+        FONT_SIZE = sys.argv[i + 1]
         i += 1
 
     i += 1
@@ -63,7 +68,7 @@ else:
 
 window.connect("delete-event", Gtk.main_quit)    # Handles the close signal
 terminal.connect("child-exited", Gtk.main_quit)  # Handles the exit signal
-terminal.set_font(Pango.FontDescription("monospace 12"))
+terminal.set_font(Pango.FontDescription("monospace " + str(FONT_SIZE)))
 terminal.set_bold_is_bright(True)                # Make text bright
 # Color of the foreground (r, g, b, a)
 terminal.set_color_foreground(Gdk.RGBA(1.0, 1.0, 1.0, 1.0))
