@@ -43,7 +43,7 @@ while i < len(sys.argv):
     arg = sys.argv[i]
 
     if arg in ("-h", "--help"):
-        print("Usage:", os.path.basename(sys.argv[0]))
+        display_help()
         sys.exit()
 
     elif arg in ("-e", "--command"):
