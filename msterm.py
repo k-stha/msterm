@@ -14,6 +14,25 @@ from gi.repository import Gtk
 from gi.repository import Pango
 from gi.repository import Vte
 
+SCRIPT = os.path.basename(sys.argv[0])
+
+
+def display_help():
+    """Display help menu."""
+    print(
+        "Usage: "
+        + SCRIPT
+        + " [OPTION...]\n\nOptions:\n"
+        + "  -h, --help            Display this help and exit\n"
+        + "  -e, --command <COMMAND>\n"
+        + "                        Run COMMAND inside the terminal\n"
+        + "  -T, -t, --title <TITLE>\n"
+        + "                        Set the title of the window as TITLE\n"
+        + "  -f, --font-size <SIZE>\n"
+        + "                        Set the font size as SIZE"
+    )
+
+
 command = [os.environ.get("SHELL")]
 SET_TITLE = False
 FONT_SIZE = 12
@@ -37,7 +56,7 @@ while i < len(sys.argv):
         SET_TITLE = True
         title = sys.argv[i + 1]
         i += 1
-    
+
     elif arg in ("-f", "--font-size"):
         FONT_SIZE = sys.argv[i + 1]
         i += 1
