@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""My Simple Terminal"""
+"""My Simple Terminal."""
 
 import os
 import sys
@@ -14,14 +14,14 @@ from gi.repository import Gtk
 from gi.repository import Pango
 from gi.repository import Vte
 
-SCRIPT = os.path.basename(sys.argv[0])
+SCRIPT_NAME = os.path.basename(sys.argv[0])
 
 
-def display_help():
-    """Display help menu."""
-    print(
+def return_help(script_name):
+    """Return help text."""
+    return (
         "Usage: "
-        + SCRIPT
+        + script_name
         + " [OPTION...]\n\nOptions:\n"
         + "  -h, --help            Display this help and exit\n"
         + "  -e, --command <COMMAND>\n"
@@ -36,28 +36,29 @@ def display_help():
 command = [os.environ.get("SHELL")]
 SET_TITLE = False
 FONT_SIZE = 12
+display_help = return_help(SCRIPT_NAME)
 
 i = 0
 
 while i < len(sys.argv):
     arg = sys.argv[i]
 
-    if arg in ("-h", "--help"):
-        display_help()
+    if arg in {"-h", "--help"}:
+        print(display_help)
         sys.exit()
 
-    elif arg in ("-e", "--command"):
+    elif arg in {"-e", "--command"}:
         SYSTEM_COMMANDS = sys.argv[i + 1]
         command.append("-c")
         command.append(SYSTEM_COMMANDS)
         i += 1
 
-    elif arg in ("-T", "-t", "--title"):
+    elif arg in {"-T", "-t", "--title"}:
         SET_TITLE = True
         title = sys.argv[i + 1]
         i += 1
 
-    elif arg in ("-f", "--font-size"):
+    elif arg in {"-f", "--font-size"}:
         FONT_SIZE = sys.argv[i + 1]
         i += 1
 
