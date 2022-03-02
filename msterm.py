@@ -38,7 +38,7 @@ SET_TITLE = False
 FONT_SIZE = 12
 display_help = return_help(SCRIPT_NAME)
 
-i = 0
+i = 1
 
 while i < len(sys.argv):
     arg = sys.argv[i]
