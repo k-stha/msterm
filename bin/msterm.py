@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-"""My Simple Terminal."""
+"""A Simple Terminal Emulator based on VTE using GTK."""
 
 import os
 import sys
@@ -35,6 +35,8 @@ def return_help(script_name):
 
 command = [os.environ.get("SHELL")]
 SET_TITLE = False
+SYSTEM_COMMANDS = []
+title = ""
 FONT_SIZE = 12
 display_help = return_help(SCRIPT_NAME)
 
