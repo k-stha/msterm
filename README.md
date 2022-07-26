@@ -1,13 +1,13 @@
 # msterm
 
-A simple terminal emulator using VTE and GTK.
+A simple terminal emulator using VTE and GTK
 
 ## Table of Contents
 
 - [Dependencies](#dependencies)
-- [Considerations](#considerations)
   - [For Arch and Arch based distributions](#for-arch-and-arch-based-distributions)
   - [For Debian and Debian based distributions](#for-debian-and-debian-based-distributions)
+- [Considerations](#considerations)
 - [Contribution Guidelines](#contribution-guidelines)
 
 ## Dependencies
