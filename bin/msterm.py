@@ -4,17 +4,15 @@
 
 import os
 import sys
+
 import gi
+
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("Pango", "1.0")
 gi.require_version("Vte", "2.91")
-from gi.repository import Gdk
-from gi.repository import Gtk
-from gi.repository import Pango
-from gi.repository import Vte
 
-SCRIPT_NAME = os.path.basename(sys.argv[0])
+from gi.repository import Gdk, Gtk, Pango, Vte
 
 
 def return_help(script_name):
@@ -33,12 +31,12 @@ def return_help(script_name):
     )
 
 
+script_name = os.path.basename(sys.argv[0])
 command = [os.environ.get("SHELL")]
-SET_TITLE = False
-SYSTEM_COMMANDS = []
-title = ""
-FONT_SIZE = 12
-display_help = return_help(SCRIPT_NAME)
+system_commands = []
+title = "msterm"
+font_size = 12
+display_help = return_help(script_name)
 
 i = 1
 
@@ -50,18 +48,17 @@ while i < len(sys.argv):
         sys.exit()
 
     elif arg in {"-e", "--command"}:
-        SYSTEM_COMMANDS = sys.argv[i + 1]
+        system_commands = sys.argv[i + 1]
         command.append("-c")
-        command.append(SYSTEM_COMMANDS)
+        command.append(system_commands)
         i += 1
 
     elif arg in {"-T", "-t", "--title"}:
-        SET_TITLE = True
         title = sys.argv[i + 1]
         i += 1
 
     elif arg in {"-f", "--font-size"}:
-        FONT_SIZE = sys.argv[i + 1]
+        font_size = sys.argv[i + 1]
         i += 1
 
     i += 1
@@ -83,18 +80,24 @@ terminal.spawn_async(
 
 window = Gtk.Window()
 
-if SET_TITLE:
-    window.set_title(title)
-else:
-    window.set_title("msterm")
+window.set_title(title)
 
 window.connect("delete-event", Gtk.main_quit)    # Handles the close signal
 terminal.connect("child-exited", Gtk.main_quit)  # Handles the exit signal
 terminal.set_font(Pango.FontDescription("monospace " + str(FONT_SIZE)))
 terminal.set_bold_is_bright(True)                # Make text bright
+
+# Scroll options
+terminal.set_scrollback_lines(0)
+terminal.set_scroll_on_output(False)
+terminal.set_scroll_on_keystroke(True)
+
 # Color of the foreground (r, g, b, a)
 terminal.set_color_foreground(Gdk.RGBA(1.0, 1.0, 1.0, 1.0))
+terminal.set_color_background(Gdk.RGBA(0.0, 0.0, 0.0, 1.0))
+
 window.add(terminal)
 window.show_all()
 
-Gtk.main()
+if __name__ == "__main__":
+    Gtk.main()
