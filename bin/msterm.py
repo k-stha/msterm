@@ -7,12 +7,15 @@ import sys
 
 import gi
 
+# Defining requirements before importing
+# Thus disabling Pylint's C0413 and Flake8's E402 warnings
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("Pango", "1.0")
 gi.require_version("Vte", "2.91")
 
-from gi.repository import Gdk, Gtk, Pango, Vte
+# pylint: disable=C0413
+from gi.repository import Gdk, Gtk, Pango, Vte    # noqa: E402
 
 
 def return_help(script_name):
@@ -34,8 +37,8 @@ def return_help(script_name):
 script_name = os.path.basename(sys.argv[0])
 command = [os.environ.get("SHELL")]
 system_commands = []
-title = "msterm"
-font_size = 12
+TITLE = "msterm"
+FONT_SIZE = 12
 display_help = return_help(script_name)
 
 i = 1
@@ -54,11 +57,11 @@ while i < len(sys.argv):
         i += 1
 
     elif arg in {"-T", "-t", "--title"}:
-        title = sys.argv[i + 1]
+        TITLE = sys.argv[i + 1]
         i += 1
 
     elif arg in {"-f", "--font-size"}:
-        font_size = sys.argv[i + 1]
+        FONT_SIZE = sys.argv[i + 1]
         i += 1
 
     i += 1
@@ -80,7 +83,7 @@ terminal.spawn_async(
 
 window = Gtk.Window()
 
-window.set_title(title)
+window.set_title(TITLE)
 
 window.connect("delete-event", Gtk.main_quit)    # Handles the close signal
 terminal.connect("child-exited", Gtk.main_quit)  # Handles the exit signal
