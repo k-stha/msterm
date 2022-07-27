@@ -24,8 +24,8 @@ A simple terminal emulator using VTE and GTK
 
 ## Considerations
 
-This terminal is not (currently) capable of protecting users from Unsafe
-copy-paste from sources like websites (See:
+This terminal emulator is not (currently) capable of protecting users from
+unsafe copy-paste from sources like websites (See:
 [Copy-Paste from Website to Terminal](https://thejh.net/misc/website-terminal-copy-paste)).
 
 ## Contribution Guidelines
