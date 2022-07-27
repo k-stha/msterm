@@ -34,12 +34,12 @@ def return_help(script_name):
     )
 
 
-script_name = os.path.basename(sys.argv[0])
+SCRIPT_NAME = os.path.basename(sys.argv[0])
 command = [os.environ.get("SHELL")]
 system_commands = []
 TITLE = "msterm"
 FONT_SIZE = 12
-display_help = return_help(script_name)
+display_help = return_help(SCRIPT_NAME)
 
 i = 1
 
@@ -103,4 +103,7 @@ window.add(terminal)
 window.show_all()
 
 if __name__ == "__main__":
-    Gtk.main()
+    try:
+        Gtk.main()
+    except KeyboardInterrupt:
+        pass
